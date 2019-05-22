@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pomfyukogram</title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+<!--Navigation Bar-->
+<nav class="navbar navbar-light bg-light d-flex">
+  <div class="container">
+    <div class="logo">
+      <a class="navbar-brand" href="/">
+        <i class="fa fa-instagram"></i>
+        Pomfyukogram
+      </a>
+    </div>
+    <div class="m-auto">
+      <form class="form-inline search-form">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      </form>
+    </div>
+    <div class="user-section">
+      <% if user_signed_in? %>
+        <%=link_to  destroy_user_session_path , method: :delete do %>
+          <i class="fa fa-sign-in"></i>
+        <% end  %>
+        <%=link_to new_post_path do %>
+          <i class="fa fa-share-square"></i>
+          <%end %>
+        <a href=<%= user_path(current_user)%>>
+          <i class="fa fa-user"></i>
+        </a>
+      <% else %>
+        <a href="<%= new_user_session_path%>">
+          <i class="fa fa-sign-in"></i>
+        </a>
+      <% end %>
+    </div>
+  </div>
+
+</nav>
+
+<main class="container" style="min-height: 500px;">
+  <%= yield %>
+</main>
+
+<footer class="container footer">
+    <p> © 2019 Pomfyuk </p>
+</footer>
+</body>
+</html>
